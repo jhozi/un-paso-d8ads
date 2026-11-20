@@ -1,264 +1,462 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="robots" content="noindex, nofollow">
-  <title id="page-title">Perfil Privado</title>
-  
-  <!-- Metadatos Open Graph para vista previa al compartir el enlace -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Diskrétní fotografie" />
-  <meta property="og:description" content="Haz clic aquí para ver las fotos completas y conversar conmigo." />
-  <meta property="og:image" content="https://i.postimg.cc/SQVxd77J/Vista-Uno-Sepia.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
+  <title id="page-title">Anna77photos</title>
+  <meta content="https://i.postimg.cc/Sxfqc8vM/2543345345.jpg" property="og:image">
+  <link rel="shortcut icon" href="https://cdn.jmpcdn.com/assets/3420/images/2.ico" type="image/x-icon">
   <style>
-    * {
-      box-sizing: border-box;
+    body {
       margin: 0;
       padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #121212;
+      font-family: Arial, sans-serif;
+      background-color: #2b2b2b;
       color: #ffffff;
+      overflow: hidden;
+    }
+    #VideoBg {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1000;
+      object-fit: cover;
+    }
+    .layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: -999;
+    }
+    .wrap {
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      padding: 15px;
-    }
-
-    .card {
-      background: #1e1e1e;
-      border-radius: 20px;
-      max-width: 400px;
-      width: 100%;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+      height: 100vh;
       text-align: center;
-      border: 1px solid #2e2e2e;
+      padding: 20px;
+      box-sizing: border-box;
     }
-
-    .image-container {
-      position: relative;
-      width: 100%;
-      height: 380px;
-      overflow: hidden;
+    .step-block {
+      max-width: 550px;
+      z-index: 10;
     }
-
-    .image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .status-badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: rgba(0, 0, 0, 0.75);
-      color: #2ecc71;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(4px);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #2ecc71;
-      border-radius: 50%;
-      display: inline-block;
-      animation: pulse 1.5s infinite;
-    }
-
-    .content {
-      padding: 25px 20px 30px;
-    }
-
-    .profile-name {
+    .question-title {
       font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-
-    .profile-bio {
-      font-size: 15px;
-      color: #b0b0b0;
-      margin-bottom: 24px;
-      line-height: 1.4;
-    }
-
-    .btn-continue {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, #ff3366, #ff5e3a);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 18px;
+      margin-bottom: 25px;
       font-weight: bold;
-      border-radius: 50px;
-      letter-spacing: 1px;
-      box-shadow: 0 8px 20px rgba(255, 51, 102, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      line-height: 1.4;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
     }
-
-    .btn-continue:hover {
+    .buttons-block {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .step-btn {
+      padding: 14px 40px;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      border: none;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .step-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(255, 51, 102, 0.6);
+      box-shadow: 0 6px 20px rgba(255, 65, 108, 0.6);
+      filter: brightness(1.1);
     }
-
-    .btn-continue:active {
-      transform: scale(0.98);
+    .step-btn.secondary {
+      background: linear-gradient(135deg, #434343, #000000);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     }
-
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.4; }
-      100% { opacity: 1; }
+    .step-btn.secondary:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+    #notif-sidebar {
+      position: fixed !important;
+      right: 15px !important;
+      bottom: 20px !important;
+      z-index: 999999 !important;
+      display: flex !important;
+      flex-direction: column-reverse !important;
+      width: 270px !important;
+      max-height: 75vh !important;
+      overflow: hidden !important;
+      background: #ffffff !important;
+      border: 1px solid #c5c5c5 !important;
+      box-shadow: -2px 2px 10px rgba(0,0,0,0.3) !important;
+      border-radius: 4px;
+    }
+    @media screen and (max-width: 768px) {
+      #VideoBg {
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+      }
+      #notif-sidebar {
+        right: 50% !important;
+        transform: translateX(50%) !important;
+        top: 15px !important;
+        bottom: auto !important;
+        width: 90% !important;
+        max-width: 320px !important;
+        max-height: 65px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
+      }
+      .question-title {
+        font-size: 18px;
+      }
+      .step-btn {
+        padding: 12px 25px;
+        font-size: 15px;
+      }
+    }
+    .notif-card {
+      background: #ffffff !important;
+      color: #333333 !important;
+      padding: 8px 12px !important;
+      border-top: 1px solid #dddddd !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      font-size: 13px !important;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease-in-out !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+    }
+    .notif-card.show {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    .notif-content {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .notif-guy-img {
+      width: 28px !important;
+      height: 28px !important;
+      object-fit: cover !important;
+      border-radius: 50% !important;
+      border: 1.5px solid #007bff !important;
+    }
+    .notif-flag-img {
+      width: 20px !important;
+      height: 14px !important;
+      object-fit: cover !important;
+      border: 1px solid #ccc !important;
+    }
+    .notif-details {
+      display: flex !important;
+      flex-direction: column !important;
+      line-height: 1.25 !important;
+    }
+    .notif-ip {
+      font-weight: bold !important;
+      color: #333333 !important;
+      font-size: 12px !important;
+    }
+    .notif-msg {
+      color: #28a745 !important;
+      font-size: 11px !important;
+    }
+    .close-btn {
+      color: #bbbbbb !important;
+      cursor: pointer !important;
+      font-size: 14px !important;
+      border: 1px solid #cccccc !important;
+      border-radius: 50% !important;
+      width: 18px !important;
+      height: 18px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+      flex-shrink: 0 !important;
     }
   </style>
 </head>
 <body>
-
-  <div class="card">
-    <div class="image-container">
-      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Foto de perfil">
-      <div class="status-badge">
-        <span class="status-dot"></span> <span id="status-text">Online now</span>
+  <div class="layer"></div>
+  <div class="wrap">
+    <div class="step-block">
+      <!-- Paso 1 -->
+      <div id="step-1" class="step-item" style="display: block;">
+        <div class="question-title" id="q-text-1">Szexuális szolgáltatásokat, táncot és erotikus masszázst kínálok otthon, szeretnéd látni a katalógusomat?</div>
+        <div class="buttons-block">
+          <div class="step-btn" id="btn-yes" onclick="siguientePaso()">Igen</div>
+          <div class="step-btn secondary" id="btn-no" onclick="siguientePaso()">Nem</div>
+        </div>
       </div>
-    </div>
-
-    <div class="content">
-      <div class="profile-name">Sofía, 27</div>
-      <div class="profile-bio" id="bio-text">Want to see my full gallery and chat with me? Click below to enter.</div>
-      
-      <a href="https://directlinkroutetrk.com/s?a=270700&sm=57908&co=332427&mt=16" class="btn-continue" id="btn-continue">CONTINUE</a>
+      <!-- Paso 2 -->
+      <div id="step-2" class="step-item" style="display: none;">
+        <div class="question-title" id="q-text-2">MEGJEGYZÉS: Beleegyezel, hogy tiszteletben tartod az alább látható meztelen nőket? Ha valakit ismersz, ne mondd el senkinek, és ne terjessz pletykákat...</div>
+        <div class="buttons-block">
+          <a href="https://directlinkroutetrk.com/s?a=270700&sm=57908&co=332427&mt=16" class="step-btn" id="btn-accept" style="text-decoration: none; display: inline-block; line-height: normal;">ELFOGADOM</a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <script>
-    // Diccionario de traducciones automáticas (18 idiomas)
-    const i18n = {
-      da: { // Danés
-        status: "Online nu",
-        bio: "Vil du se mit fulde galleri og chatte med mig? Klik nedenfor for at komme ind.",
-        btn: "FORTSÆT"
+  <div id="notif-sidebar"></div>
+
+  <video autoplay muted loop playsinline id="VideoBg">
+    <source src="https://directo.discrettasliveftosgroup.com/video.mp4" type="video/mp4">
+  </video>
+
+  <script type="text/javascript">
+    // Diccionario mundial de idiomas
+    const diccionarioMundial = {
+      es: {
+        title: "Discreto y fotos exclusivas",
+        q1: "¿Ofrezco servicios de citas, baile y masajes en casa, te gustaría ver mi catálogo?",
+        yes: "Sí",
+        no: "No",
+        q2: "AVISO: ¿Estás de acuerdo en respetar a las personas que aparecen a continuación? Si conoces a alguien, guárdalo en privado...",
+        accept: "ACEPTAR"
       },
-      es: { // Español
-        status: "En línea ahora",
-        bio: "¿Quieres ver mi galería completa y conversar conmigo? Haz clic abajo para entrar.",
-        btn: "CONTINUAR"
+      ro: {
+        title: "Noapte discretă și fotografii exclusive",
+        q1: "Ofer servicii de întâlniri, dans și masaj acasă, ai vrea să vezi catalogul meu?",
+        yes: "Da",
+        no: "Nu",
+        q2: "NOTĂ: Ești de acord să respecți persoanele afișate mai jos? Dacă cunoști pe cineva, păstrează secretul...",
+        accept: "ACCEPT"
       },
-      en: { // Inglés (Idioma por defecto global)
-        status: "Online now",
-        bio: "Want to see my full gallery and chat with me? Click below to enter.",
-        btn: "CONTINUE"
+      hu: {
+        title: "Diszkrét éjszaka, fényképek",
+        q1: "Szexuális szolgáltatásokat, táncot és erotikus masszázst kínálok otthon, szeretnéd látni a katalógusomat?",
+        yes: "Igen",
+        no: "Nem",
+        q2: "MEGJEGYZÉS: Beleegyezel, hogy tiszteletben tartod az alább látható meztelen nőket? Ha valakit ismersz, ne mondd el senkinek...",
+        accept: "ELFOGADOM"
       },
-      de: { // Alemán
-        status: "Jetzt online",
-        bio: "Möchtest du meine vollständige Galerie sehen und mit mir chatten? Klicke unten, um einzutreten.",
-        btn: "WEITER"
+      en: {
+        title: "Discreet and exclusive photos",
+        q1: "I offer home dates, dancing, and massage services, would you like to see my catalog?",
+        yes: "Yes",
+        no: "No",
+        q2: "NOTICE: Do you agree to respect the people shown below? If you know anyone, keep it private...",
+        accept: "ACCEPT"
       },
-      fr: { // Francés
-        status: "En ligne maintenant",
-        bio: "Tu veux voir ma galerie complète et discuter avec moi ? Clique ci-dessous pour entrer.",
-        btn: "CONTINUER"
+      de: {
+        title: "Diskrete Nacht und exklusive Fotos",
+        q1: "Ich biete Hausbesuche, Tanz und Massagen an, möchtest du meinen Katalog sehen?",
+        yes: "Ja",
+        no: "Nein",
+        q2: "HINWEIS: Stimmst du zu, die unten gezeigten Personen zu respektieren? Wenn du jemanden kennst, behalte es für dich...",
+        accept: "AKZEPTIEREN"
       },
-      it: { // Italiano
-        status: "Online ora",
-        bio: "Vuoi vedere la mia galleria completa e chattare con me? Clicca qui sotto per entrare.",
-        btn: "CONTINUA"
+      fr: {
+        title: "Photos discrètes et exclusives",
+        q1: "Je propose des rendez-vous à domicile, de la danse et des massages, aimerais-tu voir mon catalogue ?",
+        yes: "Oui",
+        no: "Non",
+        q2: "AVIS : Acceptes-tu de respecter les personnes présentées ci-dessous ? Si tu connais quelqu'un, garde-le pour toi...",
+        accept: "ACCEPTER"
       },
-      pt: { // Portugués
-        status: "Online agora",
-        bio: "Quer ver minha galeria completa e conversar comigo? Clique abaixo para entrar.",
-        btn: "CONTINUAR"
+      it: {
+        title: "Foto discrete ed esclusive",
+        q1: "Offro appuntamenti a domicilio, ballo e massaggi, vorresti vedere il mio catalogo?",
+        yes: "Sì",
+        no: "No",
+        q2: "AVVISO: Accetti di rispettare le persone mostrate di seguito? Se conosci qualcuno, tienilo per te...",
+        accept: "ACCETTA"
       },
-      hu: { // Húngaro
-        status: "Online most",
-        bio: "Szeretnéd látni a teljes galériámat és beszélgetni velem? Kattints alább a belépéshez.",
-        btn: "FOLYTATÁS"
+      pt: {
+        title: "Fotos discretas e exclusivas",
+        q1: "Ofereço serviços de encontros, dança e massagem em casa, gostaria de ver meu catálogo?",
+        yes: "Sim",
+        no: "Não",
+        q2: "AVISO: Você concorda em respeitar as pessoas mostradas abaixo? Se você conhece alguém, mantenha em sigilo...",
+        accept: "ACEITAR"
       },
-      cs: { // Checo
-        status: "Nyní online",
-        bio: "Chceš vidět mou kompletní galerii a chatovat se mnou? Klikni níže pro vstup.",
-        btn: "POKRAČOVAT"
+      pl: {
+        title: "Dyskretne i ekskluzywne zdjęcia",
+        q1: "Oferuję spotkania, taniec i usługi masażu w domu, czy chcesz zobaczyć mój katalog?",
+        yes: "Tak",
+        no: "Nie",
+        q2: "UWAGA: Czy zgadzasz się szanować osoby przedstawione poniżej? Jeśli kogoś znasz, zachowaj to dla siebie...",
+        accept: "AKCEPTUJ"
       },
-      sk: { // Eslovaco
-        status: "Teraz online",
-        bio: "Chceš vidieť moju kompletnú galériu a chatovať so mnou? Klikni nižšie pre vstup.",
-        btn: "POKRAČOVAŤ"
+      cs: {
+        title: "Diskrétní noc a exkluzivní fotky",
+        q1: "Nabízím domácí rande, tanec a masáže, chtěli byste vidět můj katalog?",
+        yes: "Ano",
+        no: "Ne",
+        q2: "UPOZORNĚNÍ: Souhlasíte s respektováním osob zobrazených níže? Pokud někoho znáte, nechte si to pro sebe...",
+        accept: "SOUHLASÍM"
       },
-      hr: { // Croata
-        status: "Online sada",
-        bio: "Želiš li vidjeti moju cijelu galeriju i razgovarati sa mnom? Klikni ispod za ulazak.",
-        btn: "NASTAVI"
+      ru: {
+        title: "Дискретные и эксклюзивные фото",
+        q1: "Я предлагаю услуги на дому, танцы и массаж, хотели бы вы посмотреть мой каталог?",
+        yes: "Да",
+        no: "Нет",
+        q2: "УВЕДОМЛЕНИЕ: Согласны ли вы уважать людей, показанных ниже? Если вы кого-то знаете, держите это в секрете...",
+        accept: "ПРИНЯТЬ"
       },
-      pl: { // Polaco
-        status: "Online teraz",
-        bio: "Chcesz zobaczyć całą moją galerię i porozmawiać ze mną? Kliknij poniżej, aby wejść.",
-        btn: "KONTYNUUJ"
+      hr: {
+        title: "Diskretna noć i ekskluzivne fotografije",
+        q1: "Nudim usluge spojeva, plesa i masaže kod kuće, želite li vidjeti moj katalog?",
+        yes: "Da",
+        no: "Ne",
+        q2: "OBAVIJEST: Pristajete li poštovati osobe prikazane u nastavku? Ako nekoga poznajete, zadržite to za sebe...",
+        accept: "PRIHVATI"
       },
-      el: { // Griego
-        status: "Συνδεδεμένη τώρα",
-        bio: "Θέλεις να δεις όλη τη συλλογή μου και να συνομιλήσεις μαζί μου; Κάνε κλικ παρακάτω για είσοδο.",
-        btn: "ΣΥΝΕΧΕΙΑ"
+      el: {
+        title: "Διακριτικές και αποκλειστικές φωτογραφίες",
+        q1: "Προσφέρω ραντεβού κατ' οίκον, χορό και υπηρεσίες μασάζ, θα θέλατε να δείτε τον κατάλογό μου;",
+        yes: "Ναι",
+        no: "Όχι",
+        q2: "ΕΙΔΟΠΟΙΗΣΗ: Συμφωνείτε να σεβαστείτε τα άτομα που εμφανίζονται παρακάτω; Αν γνωρίζετε κάποιον, κρατήστε το ιδιωτικό...",
+        accept: "ΑΠΟΔΟΧΗ"
       },
-      nl: { // Holandés / Neerlandés
-        status: "Nu online",
-        bio: "Wil je mijn volledige galerij bekijken en met mij chatten? Klik hieronder om binnen te komen.",
-        btn: "DOORGAAN"
+      nl: {
+        title: "Discrete en exclusieve foto's",
+        q1: "Ik bied thuisdates, dans en massageservices aan, wil je mijn catalogus zien?",
+        yes: "Ja",
+        no: "Nee",
+        q2: "OPMERKING: Ga je ermee akkoord de onderstaande personen te respecteren? Als je iemand kent, houd het dan privé...",
+        accept: "ACCEPTEREN"
       },
-      sl: { // Esloveno
-        status: "Zdaj na spletu",
-        bio: "Želiš videti mojo celotno galerijo in klepetati z mano? Klikni spodaj za vstop.",
-        btn: "NADALJUJ"
+      sk: {
+        title: "Diskrétna noc a exkluzívne fotky",
+        q1: "Ponúkam domáce stretnutia, tanec a masážne služby, chceli by ste vidieť môj katalóg?",
+        yes: "Áno",
+        no: "Nie",
+        q2: "UPOZORNENIE: Súhlasíte s tým, že budete rešpektovať osoby zobrazené nižšie? Ak niekoho poznáte, nechajte si to pre seba...",
+        accept: "SÚHLASÍM"
       },
-      fi: { // Finés
-        status: "Paikalla nyt",
-        bio: "Haluatko nähdä koko galleriani ja jutella kanssani? Klikkaa alta päästäksesi sisään.",
-        btn: "JATKA"
+      sl: {
+        title: "Diskretna noč in ekskluzivne fotografije",
+        q1: "Ponujam zmenke na domu, ples in masažne storitve, ali želite videti moj katalog?",
+        yes: "Da",
+        no: "Ne",
+        q2: "OBVESTILO: Ali se strinjate, da boste spoštovali spodaj prikazane osebe? Če koga poznate, to obdržite zase...",
+        accept: "SPREJMI"
       },
-      ro: { // Rumano
-        status: "Online acum",
-        bio: "Vrei să vezi galeria mea completă și să vorbești cu mine? Dă clic mai jos pentru a intra.",
-        btn: "CONTINUĂ"
+      da: {
+        title: "Diskrete og eksklusive billeder",
+        q1: "Jeg tilbyder hjemmedates, dans og massageservice, vil du gerne se mit katalog?",
+        yes: "Ja",
+        no: "Nej",
+        q2: "BEMÆRK: Accepterer du at respektere de personer, der vises nedenfor? Hvis du kender nogen, så hold det privat...",
+        accept: "ACCEPTER"
       },
-      ru: { // Ruso
-        status: "Сейчас в сети",
-        bio: "Хочешь увидеть всю мою галерею и пообщаться со мной? Нажми ниже, чтобы войти.",
-        btn: "ПРОДОЛЖИТЬ"
+      fi: {
+        title: "Huomaamattomat ja eksklusiiviset kuvat",
+        q1: "Tarjoan kotitreffejä, tanssia ja hierontapalveluita, haluaisitko nähdä luetteloni?",
+        yes: "Kyllä",
+        no: "Ei",
+        q2: "HUOMAUTUS: Suostutko kunnioittamaan alla näkyviä henkilöitä? Jos tunnet jonkun, pidä se omana tietonasi...",
+        accept: "HYVÄKSY"
       }
     };
 
-    // Detección automática del idioma del navegador del usuario
+    // Detección automática del idioma del navegador
     window.addEventListener("DOMContentLoaded", () => {
-      const userLang = (navigator.language || navigator.userLanguage || "en").toLowerCase().substring(0, 2);
-      const t = i18n[userLang] || i18n["en"];
-
-      document.getElementById("status-text").innerText = t.status;
-      document.getElementById("bio-text").innerText = t.bio;
-      document.getElementById("btn-continue").innerText = t.btn;
-      document.documentElement.lang = userLang;
+      const userLang = (navigator.language || navigator.userLanguage || "hu").toLowerCase().substring(0, 2);
+      if (diccionarioMundial[userLang]) {
+        const t = diccionarioMundial[userLang];
+        document.getElementById("page-title").innerText = t.title;
+        document.getElementById("q-text-1").innerText = t.q1;
+        document.getElementById("btn-yes").innerText = t.yes;
+        document.getElementById("btn-no").innerText = t.no;
+        document.getElementById("q-text-2").innerText = t.q2;
+        document.getElementById("btn-accept").innerText = t.accept;
+        document.documentElement.lang = userLang;
+      }
     });
+
+    function siguientePaso() {
+      document.getElementById('step-1').style.display = 'none';
+      document.getElementById('step-2').style.display = 'block';
+    }
+
+    // Lista única de hombres con rostros y países totalmente distintos
+    const poolNotificaciones = [
+      { msg: "Sikeres regisztráció", flag: "https://flagcdn.com/w40/hu.png", foto: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
+      { msg: "Úspěšně zaregistrováno", flag: "https://flagcdn.com/w40/cz.png", foto: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" },
+      { msg: "Erfolgreich registriert", flag: "https://flagcdn.com/w40/de.png", foto: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop" },
+      { msg: "Inscrit avec succès", flag: "https://flagcdn.com/w40/fr.png", foto: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+      { msg: "Registrado con éxito", flag: "https://flagcdn.com/w40/es.png", foto: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop" },
+      { msg: "Registrato con successo", flag: "https://flagcdn.com/w40/it.png", foto: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop" },
+      { msg: "Zarejestrowano pomyślnie", flag: "https://flagcdn.com/w40/pl.png", foto: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop" },
+      { msg: "Înregistrat cu succes", flag: "https://flagcdn.com/w40/ro.png", foto: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop" },
+      { msg: "Επιτυχής εγγραφή", flag: "https://flagcdn.com/w40/gr.png", foto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+      { msg: "Succesvol geregistreerd", flag: "https://flagcdn.com/w40/nl.png", foto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+      { msg: "Úspešne zaregistrované", flag: "https://flagcdn.com/w40/sk.png", foto: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=100&h=100&fit=crop" },
+      { msg: "Uspešno registrirano", flag: "https://flagcdn.com/w40/si.png", foto: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop" },
+      { msg: "Registreret med succes", flag: "https://flagcdn.com/w40/dk.png", foto: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+      { msg: "Rekisteröity onnistuneesti", flag: "https://flagcdn.com/w40/fi.png", foto: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop" }
+    ];
+
+    let colaDisponible = [];
+
+    function obtenerNotificacionUnica() {
+      if (colaDisponible.length === 0) {
+        colaDisponible = [...poolNotificaciones];
+      }
+      const indiceAleatorio = Math.floor(Math.random() * colaDisponible.length);
+      return colaDisponible.splice(indiceAleatorio, 1)[0];
+    }
+
+    function generarIP() {
+      return `${Math.floor(Math.random() * 190) + 10}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 254) + 1}`;
+    }
+
+    function agregarNotificacion() {
+      const sidebar = document.getElementById("notif-sidebar");
+      if (!sidebar) return;
+      const item = obtenerNotificacionUnica();
+      const ip = generarIP();
+      const card = document.createElement("div");
+      card.className = "notif-card";
+      card.innerHTML = `
+        <div class="notif-content">
+          <img src="${item.foto}" class="notif-guy-img" alt="avatar">
+          <img src="${item.flag}" class="notif-flag-img" alt="flag">
+          <div class="notif-details">
+            <span class="notif-ip">${ip}</span>
+            <span class="notif-msg">${item.msg}</span>
+          </div>
+        </div>
+        <span class="close-btn" onclick="this.parentElement.remove()">×</span>
+      `;
+      sidebar.insertBefore(card, sidebar.firstChild);
+      setTimeout(() => { card.classList.add("show"); }, 50);
+      const esMovil = window.innerWidth <= 768;
+      const maximoVisible = esMovil ? 1 : 6;
+      if (sidebar.children.length > maximoVisible) {
+        sidebar.removeChild(sidebar.lastChild);
+      }
+    }
+
+    window.onload = function() {
+      agregarNotificacion();
+      setTimeout(agregarNotificacion, 800);
+      setInterval(agregarNotificacion, 3000);
+    };
   </script>
 
-  <div style="display: none; visibility: hidden; position: absolute;">
-    <script id="_wau5y6">var _wau = _wau || []; _wau.push(["dynamic", "gum22", "5y6", "c4302bffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
-  </div>
+<script id="_wau5y6">var _wau = _wau || []; _wau.push(["dynamic", "gum22", "5y6", "c4302bffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
 
 </body>
 </html>
