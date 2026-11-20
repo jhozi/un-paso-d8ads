@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow">
+  <title id="page-title">Perfil Privado</title>
+  
+  <!-- Metadatos Open Graph para vista previa al compartir el enlace -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Diskrétní fotografie" />
+  <meta property="og:description" content="Haz clic aquí para ver las fotos completas y conversar conmigo." />
+  <meta property="og:image" content="https://i.postimg.cc/SQVxd77J/Vista-Uno-Sepia.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    .card {
+      background: #1e1e1e;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      border: 1px solid #2e2e2e;
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .status-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #2ecc71;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(4px);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #2ecc71;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+
+    .content {
+      padding: 25px 20px 30px;
+    }
+
+    .profile-name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .profile-bio {
+      font-size: 15px;
+      color: #b0b0b0;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .btn-continue {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #ff3366, #ff5e3a);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 20px rgba(255, 51, 102, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-continue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(255, 51, 102, 0.6);
+    }
+
+    .btn-continue:active {
+      transform: scale(0.98);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Foto de perfil">
+      <div class="status-badge">
+        <span class="status-dot"></span> <span id="status-text">Online now</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="profile-name">Sofía, 27</div>
+      <div class="profile-bio" id="bio-text">Want to see my full gallery and chat with me? Click below to enter.</div>
+      
+      <a href="https://directlinkroutetrk.com/s?a=270700&sm=57908&co=332427&mt=16" class="btn-continue" id="btn-continue">CONTINUE</a>
+    </div>
+  </div>
+
+  <script>
+    // Diccionario de traducciones automáticas (18 idiomas)
+    const i18n = {
+      da: { // Danés
+        status: "Online nu",
+        bio: "Vil du se mit fulde galleri og chatte med mig? Klik nedenfor for at komme ind.",
+        btn: "FORTSÆT"
+      },
+      es: { // Español
+        status: "En línea ahora",
+        bio: "¿Quieres ver mi galería completa y conversar conmigo? Haz clic abajo para entrar.",
+        btn: "CONTINUAR"
+      },
+      en: { // Inglés (Idioma por defecto global)
+        status: "Online now",
+        bio: "Want to see my full gallery and chat with me? Click below to enter.",
+        btn: "CONTINUE"
+      },
+      de: { // Alemán
+        status: "Jetzt online",
+        bio: "Möchtest du meine vollständige Galerie sehen und mit mir chatten? Klicke unten, um einzutreten.",
+        btn: "WEITER"
+      },
+      fr: { // Francés
+        status: "En ligne maintenant",
+        bio: "Tu veux voir ma galerie complète et discuter avec moi ? Clique ci-dessous pour entrer.",
+        btn: "CONTINUER"
+      },
+      it: { // Italiano
+        status: "Online ora",
+        bio: "Vuoi vedere la mia galleria completa e chattare con me? Clicca qui sotto per entrare.",
+        btn: "CONTINUA"
+      },
+      pt: { // Portugués
+        status: "Online agora",
+        bio: "Quer ver minha galeria completa e conversar comigo? Clique abaixo para entrar.",
+        btn: "CONTINUAR"
+      },
+      hu: { // Húngaro
+        status: "Online most",
+        bio: "Szeretnéd látni a teljes galériámat és beszélgetni velem? Kattints alább a belépéshez.",
+        btn: "FOLYTATÁS"
+      },
+      cs: { // Checo
+        status: "Nyní online",
+        bio: "Chceš vidět mou kompletní galerii a chatovat se mnou? Klikni níže pro vstup.",
+        btn: "POKRAČOVAT"
+      },
+      sk: { // Eslovaco
+        status: "Teraz online",
+        bio: "Chceš vidieť moju kompletnú galériu a chatovať so mnou? Klikni nižšie pre vstup.",
+        btn: "POKRAČOVAŤ"
+      },
+      hr: { // Croata
+        status: "Online sada",
+        bio: "Želiš li vidjeti moju cijelu galeriju i razgovarati sa mnom? Klikni ispod za ulazak.",
+        btn: "NASTAVI"
+      },
+      pl: { // Polaco
+        status: "Online teraz",
+        bio: "Chcesz zobaczyć całą moją galerię i porozmawiać ze mną? Kliknij poniżej, aby wejść.",
+        btn: "KONTYNUUJ"
+      },
+      el: { // Griego
+        status: "Συνδεδεμένη τώρα",
+        bio: "Θέλεις να δεις όλη τη συλλογή μου και να συνομιλήσεις μαζί μου; Κάνε κλικ παρακάτω για είσοδο.",
+        btn: "ΣΥΝΕΧΕΙΑ"
+      },
+      nl: { // Holandés / Neerlandés
+        status: "Nu online",
+        bio: "Wil je mijn volledige galerij bekijken en met mij chatten? Klik hieronder om binnen te komen.",
+        btn: "DOORGAAN"
+      },
+      sl: { // Esloveno
+        status: "Zdaj na spletu",
+        bio: "Želiš videti mojo celotno galerijo in klepetati z mano? Klikni spodaj za vstop.",
+        btn: "NADALJUJ"
+      },
+      fi: { // Finés
+        status: "Paikalla nyt",
+        bio: "Haluatko nähdä koko galleriani ja jutella kanssani? Klikkaa alta päästäksesi sisään.",
+        btn: "JATKA"
+      },
+      ro: { // Rumano
+        status: "Online acum",
+        bio: "Vrei să vezi galeria mea completă și să vorbești cu mine? Dă clic mai jos pentru a intra.",
+        btn: "CONTINUĂ"
+      },
+      ru: { // Ruso
+        status: "Сейчас в сети",
+        bio: "Хочешь увидеть всю мою галерею и пообщаться со мной? Нажми ниже, чтобы войти.",
+        btn: "ПРОДОЛЖИТЬ"
+      }
+    };
+
+    // Detección automática del idioma del navegador del usuario
+    window.addEventListener("DOMContentLoaded", () => {
+      const userLang = (navigator.language || navigator.userLanguage || "en").toLowerCase().substring(0, 2);
+      const t = i18n[userLang] || i18n["en"];
+
+      document.getElementById("status-text").innerText = t.status;
+      document.getElementById("bio-text").innerText = t.bio;
+      document.getElementById("btn-continue").innerText = t.btn;
+      document.documentElement.lang = userLang;
+    });
+  </script>
+<script id="_wau5y6">var _wau = _wau || []; _wau.push(["dynamic", "gum22", "5y6", "c4302bffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
+
+</body>
+</html>
